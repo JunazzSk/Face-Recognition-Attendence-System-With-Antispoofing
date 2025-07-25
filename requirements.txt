@@ -1,0 +1,16 @@
+opencv-python
+numpy
+dlib
+scikit-learn
+flask
+joblib
+ultralytics
+matplotlib
+Pillow
+Notes:
+
+If you use a virtual environment, you can generate this file with pip freeze > requirements.txt after installing all packages.
+For Windows, you may need to install cmake and wheel before installing dlib:
+pip install cmake wheel
+pip install dlib
+If you use a different YOLO library, adjust ultralytics accordingly.
