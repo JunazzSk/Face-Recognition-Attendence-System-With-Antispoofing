@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="overlay">
+      <h1>Face Detection Attendance System</h1>
+      <h2>Features</h2>
+
+      <div class="button-group">
+        <button class="nav-button" onclick="navigateTo('/features/startAttendance')">Start Attendance</button>
+        <button class="nav-button" onclick="navigateTo('/features/studentdata')">Student Data Entry</button>
+        <button class="nav-button" id="trainDataButton" onclick="trainData()">Train Data</button>
+        <button class="nav-button" onclick="navigateTo('/features/show_attendance')">Show Attendance</button>
+        <button class="nav-button" onclick="navigateTo('/features/teacherData')">Teacher/Subject Info</button>
+      </div>
+
+      <!-- Admin Login Form -->
+      <form class="admin-login" onsubmit="handleLogin(event)">
+        <h3>Admin Login</h3>
+        <input type="text" id="adminId" placeholder="Username" required />
+        <input type="password" id="adminPassword" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+
+      <!-- Signup Button -->
+      <button class="signup-button" onclick="showModal('Signup')">Signup</button>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="adminModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modal-title">Admin Signup</h2>
+      <form id="adminForm">
+        <label for="newAdminId">New Admin ID:</label>
+        <input type="text" id="newAdminId" required />
+        <label for="newAdminPassword">New Password:</label>
+        <input type="password" id="newAdminPassword" required />
+        <button type="button" onclick="submitAdminForm()">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../static/js/script.js"></script>
+</body>
+</html>

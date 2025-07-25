@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Start Attendance</title>
+</head>
+<body>
+    <div id="attendance-page" class="container">
+        <h1>Start Attendance</h1>
+        <form action="/features/api/startNewAttendance" method="POST">
+            <label for="teacher">Select Teacher:</label>
+            <select id="teacher" name="teacher" required>
+                {% for teacher in teachers %}
+                    <option value="{{ teacher['Name'] }}">{{ teacher['Name'] }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="subject">Select Subject:</label>
+            <select id="subject" name="subject" required>
+                {% for subject in subjects %}
+                    <option value="{{ subject['Subject'] }}">{{ subject['Subject'] }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="period">Select Period:</label>
+            <select id="period" name="period" required>
+                <option value="" disabled selected>Select Period</option>
+                {% for i in range(1, 9) %}
+                    <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Start Attendance</button>
+        </form>
+    </div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

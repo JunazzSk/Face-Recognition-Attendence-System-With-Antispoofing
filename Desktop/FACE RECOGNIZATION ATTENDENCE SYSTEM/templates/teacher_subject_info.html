@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher and Subject Information</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">Teacher and Subject Information</h1>
+        {% if teacher_subject_info %}
+        <table class="admin-dashboard-table">
+            <thead>
+                <tr>
+                    <th>Teacher</th>
+                    <th>Subject</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in teacher_subject_info %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No teacher and subject data found.</p>
+        {% endif %}
+        <button class="back-button" onclick="navigateTo('/features')">Back to Features</button>
+    </div>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

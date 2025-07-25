@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div id="attendance-page">
+            <h1>Attendance Detection</h1>
+            <div id="videoContainer">
+                <img id="video" src="{{ url_for('features.video_feed') }}" width="640" height="480" alt="Video Stream">
+            </div>
+            <form action="{{ url_for('features.stop_attendance') }}" method="post">
+                <button type="submit">Stop Attendance</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

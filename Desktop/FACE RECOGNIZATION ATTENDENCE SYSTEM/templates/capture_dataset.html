@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Dataset</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="attendance-page">
+            <h1>Capturing Dataset for Student ID: {{ student_id }}</h1>
+            <div id="videoContainer">
+              <img id="video" src="{{ url_for('studentdata.video_feed', student_id=student_id) }}" width="640" height="480">
+            </div>
+            <p>Capturing images... Please wait.</p>
+        </div>
+    </div>
+    <script>
+        const studentId = "{{ student_id }}";
+        const checkCompletion = setInterval(() => {
+            fetch(`/studentdata/capture_status/${studentId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "COMPLETE") {
+                        console.log("Dataset capture complete. Redirecting...");
+                        clearInterval(checkCompletion); // Stop polling
+                        window.location.href = "{{ url_for('studentdata.student_data_entry_form') }}";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error checking capture status:", error);
+                });
+        }, 1000); // Check every second
+    </script>
+</body>
+</html>

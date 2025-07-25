@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Attendance</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">Show Attendance</h1>
+        <form method="POST" class="filter-form">
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" value="{{ filters.get('date', '') }}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="teacher">Teacher:</label>
+                <select id="teacher" name="teacher" class="form-control">
+                    <option value="">All Teachers</option>
+                    {% for teacher in teachers %}
+                        <option value="{{ teacher.teacher }}" {% if filters.get('teacher') == teacher.teacher %}selected{% endif %}>{{ teacher.teacher }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <select id="subject" name="subject" class="form-control">
+                    <option value="">All Subjects</option>
+                    {% for subject in subjects %}
+                        <option value="{{ subject.subject }}" {% if filters.get('subject') == subject.subject %}selected{% endif %}>{{ subject.subject }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <button type="button" class="btn btn-primary" onclick="downloadAttendance()">Download Attendance</button>
+           
+        </form>
+        <button class="back-button" onclick="navigateTo('/features')">Back to Features</button>
+        <table class="attendance-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Teacher</th>
+                    <th>Subject</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in attendance_records %}
+                <tr>
+                    <td>{{ record.student_id }}</td>
+                    <td>{{ record.date }}</td>
+                    <td>{{ record.teacher }}</td>
+                    <td>{{ record.subject }}</td>
+                    <td>
+                        <button class="btn btn-primary" 
+                                onclick="deleteAttendance('{{ record.student_id }}', '{{ record.date }}', '{{ record.time }}', '{{ record.teacher }}', '{{ record.subject }}', '{{ record.period }}')">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Success message popup -->
+        <div id="success-message" style="display: none; background-color: #d4edda; color: #155724; padding: 10px; margin-top: 10px; border: 1px solid #c3e6cb; border-radius: 5px;">
+            Attendance record deleted successfully.
+        </div>
+
+
+    </div>
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
